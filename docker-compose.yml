@@ -1,32 +1,28 @@
-version: '3.8'
-
 services:
-  # 🗄️ Layanan Database PostgreSQL untuk DBA & Backend
-  postgres-db:
-    image: postgres:15-alpine
-    container_name: kampus_postgres_db
+  postgres:
+    image: postgres:15
+    container_name: postgres_fasilitas_kampus
     restart: always
     environment:
-      POSTGRES_USER: admin_kampus
-      POSTGRES_PASSWORD: password_rahasia_123
-      POSTGRES_DB: db_peminjaman_fasilitas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: hana789
+      POSTGRES_DB: fasilitas_kampus
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # 🌐 Alat Kelola Database (PgAdmin) berbasis Web
   pgadmin:
     image: dpage/pgadmin4
-    container_name: kampus_pgadmin
+    container_name: pgadmin_fasilitas_kampus
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: devops@kampus.ac.id
-      PGADMIN_DEFAULT_PASSWORD: adminpassword123
+      PGADMIN_DEFAULT_EMAIL: adminkampus@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: Laboran1945
     ports:
       - "5050:80"
     depends_on:
-      - postgres-db
+      - postgres
 
 volumes:
   postgres_data:
